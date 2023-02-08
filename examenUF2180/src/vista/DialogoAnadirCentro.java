@@ -105,6 +105,11 @@ public class DialogoAnadirCentro extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						setVisible(false);
+						
+						
+						
+						
+						
 					}
 				});
 				cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
