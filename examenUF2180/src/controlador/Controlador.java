@@ -15,6 +15,8 @@ import vista.DialogoAnadirCentro;
 import vista.VentanaMostrarCentros;
 import vista.VentanaPpal;
 import vista.VentanaMostrarDepartamentos;
+import vista.DialogoAnadirDepartamento;
+
 
 /**
  * @author David
@@ -28,6 +30,8 @@ public class Controlador {
 	private DialogoAnadirCentro dialogoAnadirCentro;
 	
 	private VentanaMostrarDepartamentos ventanaMostrarDepartamentos;
+	private DialogoAnadirDepartamento dialogoAnadirDepartamento;
+
 	//private DialogoAnadirCentro dialogoAnadirDepartamentos;
 	
 	// Objetos DAO o CRUD de la base de datos
@@ -42,6 +46,8 @@ public class Controlador {
 		ventanaMostrarCentros = new VentanaMostrarCentros();
 		dialogoAnadirCentro = new DialogoAnadirCentro();
 		ventanaMostrarDepartamentos = new VentanaMostrarDepartamentos();
+		dialogoAnadirDepartamento = new DialogoAnadirDepartamento();
+
 		
 		// Dando acceso al controlador desde las vistas
 		ventanaPpal.setControlador(this);
@@ -77,6 +83,10 @@ public class Controlador {
 	public void mostrarInsertarCentros() {
 		dialogoAnadirCentro.setVisible(true);
 	}
+	
+	public void mostrarInsertarDepartamentos() {
+		dialogoAnadirDepartamento.setVisible(true);
+	}
 
 
 	/** 
@@ -90,6 +100,16 @@ public class Controlador {
 			JOptionPane.showMessageDialog(dialogoAnadirCentro, "Error. no se ha podido insertar.");
 		} else {
 			JOptionPane.showMessageDialog(dialogoAnadirCentro, "Insercion del centro correcta");
+			dialogoAnadirCentro.setVisible(false);
+		}
+	}
+	
+	public void insertarDepartamento(Departamento departamento) {
+		int resultado = departamentoDAO.insertarDepartamento(departamento);
+		if (resultado ==0) {
+			JOptionPane.showMessageDialog(dialogoAnadirDepartamento, "Error. no se ha podido insertar.");
+		} else {
+			JOptionPane.showMessageDialog(dialogoAnadirDepartamento, "Insercion del centro correcta");
 			dialogoAnadirCentro.setVisible(false);
 		}
 	}

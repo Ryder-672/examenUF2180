@@ -2,7 +2,6 @@ package vista;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
@@ -16,16 +15,20 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DialogoAñadirDepartamento extends JFrame {
+public class DialogoAnadirDepartamento extends JDialog {
 
 	private JPanel contentPane = new JPanel();
 	private JTextField textCodDepa;
@@ -33,6 +36,10 @@ public class DialogoAñadirDepartamento extends JFrame {
 	private final ButtonGroup TipoDir = new ButtonGroup();
 	private JTextField textNombre;
 	private JSpinner spinnerPresupuesto;
+	private JRadioButton rdbtnFunciones;
+	private Controlador controlador;
+
+	private String tdir = "";
 
 	/**
 	 * Launch the application.
@@ -41,7 +48,7 @@ public class DialogoAñadirDepartamento extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DialogoAñadirDepartamento frame = new DialogoAñadirDepartamento();
+					DialogoAnadirDepartamento frame = new DialogoAnadirDepartamento();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,8 +60,8 @@ public class DialogoAñadirDepartamento extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DialogoAñadirDepartamento() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public DialogoAnadirDepartamento() {
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,7 +76,7 @@ public class DialogoAñadirDepartamento extends JFrame {
 		panel.setLayout(new MigLayout("", "[][][139.00,grow][153.00]", "[grow][grow][grow][grow][grow]"));
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(DialogoAñadirDepartamento.class.getResource("/images/editar32.png")));
+		lblNewLabel_3.setIcon(new ImageIcon(DialogoAnadirDepartamento.class.getResource("/images/editar32.png")));
 		panel.add(lblNewLabel_3, "cell 0 0 1 2");
 		
 		JLabel lblNewLabel = new JLabel("Código:");
@@ -100,21 +107,34 @@ public class DialogoAñadirDepartamento extends JFrame {
 		rdbtnPropiedad.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(rdbtnPropiedad, "flowx,cell 2 2");
 		
+	
+		
+		if (rdbtnPropiedad.isSelected()) {
+			tdir = "P";
+		}else if (rdbtnFunciones.isSelected()) {
+			tdir = "F";
+		}
+		
 		JLabel lblPresupuesto = new JLabel("Presupuesto:");
 		lblPresupuesto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblPresupuesto, "cell 1 3,alignx right");
 		
-		spinnerPresupuesto = new JSpinner();
+		int min = 1;
+		int max = 100;
+		int step = 1;
+		int ini = 5;
+		
+		SpinnerModel value = new SpinnerNumberModel(ini, min, max, step);
+		spinnerPresupuesto = new JSpinner(value);
 		spinnerPresupuesto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		spinnerPresupuesto.getModel().setValue(5);
-	//	spinnerPresupuesto.getModel().setMinimum(2);
+		
 		panel.add(spinnerPresupuesto, "flowx,cell 2 3");
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(lblNombre, "cell 1 4,alignx trailing");
 		
-		JRadioButton rdbtnFunciones = new JRadioButton("En funciones");
+		rdbtnFunciones = new JRadioButton("En funciones");
 		TipoDir.add(rdbtnFunciones);
 		rdbtnFunciones.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(rdbtnFunciones, "cell 2 2");
@@ -171,14 +191,12 @@ public class DialogoAñadirDepartamento extends JFrame {
 	protected void recogerDatos() {
 		int cod_departamento = Integer.parseInt(textCodDepa.getText());
 		int cod_centro = Integer.parseInt(textCodCentro.getText());
-		String tipo_dir = TipoDir.();
+		String tipo_dir = tdir;
 		int presupuesto = Integer.parseInt(textCodCentro.getText());
 		String nombre = textNombre.getText();
 		
-		Departamento departamento = new Departamento(cod_departamento, cod_centro, tipo_dir,presupuesto , nombre);
-		
-		int cantidad = (int) spinnerCantidad.getValue();
-		controlador.insertaCentro(centro);
+		Departamento departamento = new Departamento(cod_departamento, cod_centro, tipo_dir ,presupuesto , nombre);
+		controlador.insertarDepartamento(departamento);
 		
 	}
 
