@@ -15,7 +15,7 @@ import vista.DialogoAnadirCentro;
 import vista.VentanaMostrarCentros;
 import vista.VentanaPpal;
 import vista.VentanaMostrarDepartamentos;
-import vista.DialogoAnadirDepartamento;
+import vista.DialogoAnadirDepartamentos;
 
 
 /**
@@ -30,7 +30,7 @@ public class Controlador {
 	private DialogoAnadirCentro dialogoAnadirCentro;
 	
 	private VentanaMostrarDepartamentos ventanaMostrarDepartamentos;
-	private DialogoAnadirDepartamento dialogoAnadirDepartamento;
+	private DialogoAnadirDepartamentos dialogoAnadirDepartamento;
 
 	//private DialogoAnadirCentro dialogoAnadirDepartamentos;
 	
@@ -46,7 +46,7 @@ public class Controlador {
 		ventanaMostrarCentros = new VentanaMostrarCentros();
 		dialogoAnadirCentro = new DialogoAnadirCentro();
 		ventanaMostrarDepartamentos = new VentanaMostrarDepartamentos();
-		dialogoAnadirDepartamento = new DialogoAnadirDepartamento();
+		dialogoAnadirDepartamento = new DialogoAnadirDepartamentos();
 
 		
 		// Dando acceso al controlador desde las vistas

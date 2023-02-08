@@ -28,7 +28,7 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DialogoAnadirDepartamento extends JDialog {
+public class DialogoAnadirDepartamentos extends JDialog {
 
 	private JPanel contentPane = new JPanel();
 	private JTextField textCodDepa;
@@ -48,7 +48,7 @@ public class DialogoAnadirDepartamento extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DialogoAnadirDepartamento frame = new DialogoAnadirDepartamento();
+					DialogoAnadirDepartamentos frame = new DialogoAnadirDepartamentos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +60,7 @@ public class DialogoAnadirDepartamento extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public DialogoAnadirDepartamento() {
+	public DialogoAnadirDepartamentos() {
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -76,7 +76,7 @@ public class DialogoAnadirDepartamento extends JDialog {
 		panel.setLayout(new MigLayout("", "[][][139.00,grow][153.00]", "[grow][grow][grow][grow][grow]"));
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(DialogoAnadirDepartamento.class.getResource("/images/editar32.png")));
+		lblNewLabel_3.setIcon(new ImageIcon(DialogoAnadirDepartamentos.class.getResource("/images/editar32.png")));
 		panel.add(lblNewLabel_3, "cell 0 0 1 2");
 		
 		JLabel lblNewLabel = new JLabel("Código:");
@@ -186,11 +186,11 @@ public class DialogoAnadirDepartamento extends JDialog {
 	}
 	
 	
-	
+
 	
 	protected void recogerDatos() {
 		int cod_departamento = Integer.parseInt(textCodDepa.getText());
-		int cod_centro = Integer.parseInt(textCodCentro.getText());
+		int cod_centro  = Integer.parseInt(textCodCentro.getText());
 		String tipo_dir = tdir;
 		int presupuesto = Integer.parseInt(textCodCentro.getText());
 		String nombre = textNombre.getText();
@@ -199,9 +199,11 @@ public class DialogoAnadirDepartamento extends JDialog {
 		controlador.insertarDepartamento(departamento);
 		
 	}
-
-
+	
+	
 	public void setControlador(Controlador controlador) {
 		this.controlador=controlador;
 	}
+
+
 }
